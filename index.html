@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="turn.min.js"></script>
+
+<style type="text/css">
+body{
+	background:#ccc;
+}
+#magazine{
+	width:800px;
+	height:500px;
+}
+
+#magazine .cover{
+	background :#333;
+}
+
+#magazine .cover h1{
+	color:white;
+	text-align:center;
+	font-size:50px;
+	line-height:500px;
+	margin:0px;
+}
+
+#magazine .turn-page{
+	background-color:#ccc;
+	background-size:100% 100%;
+}
+</style>
+</head>
+<body>
+
+<div id="magazine">
+		<div>
+		<div class="cover"><h1>Bullet Journal</h1></div>
+		</div>
+		<div style="background-image:url(pages/bg3.jpg);"></div>
+		<div style="background-image:url(pages/bg4.jpg);"></div>
+		<div style="background-image:url(pages/bg5.jpg);"></div>
+		<div style="background-image:url(pages/bg5.jpg);"></div>
+		<div style="background-image:url(pages/bg5.jpg);"></div>
+		<div style="background-image:url(pages/bg5.jpg);"></div>
+	</div>
+
+
+<script type="text/javascript">
+
+	$(window).ready(function() {
+		$('#magazine').turn({
+							display: 'double',
+							acceleration: true,
+							gradients: !$.isTouch,
+							elevation:50,
+							when: {
+								turned: function(e, page) {
+									console.log('Current view: ', $(this).turn('view'));
+								}
+							}
+						});
+	});
+	
+	
+	$(window).bind('keydown', function(e){
+		
+		if (e.keyCode==37)
+			$('#magazine').turn('previous');
+		else if (e.keyCode==39)
+			$('#magazine').turn('next');
+			
+	});
+
+</script>
+
+</body>
+</html>
